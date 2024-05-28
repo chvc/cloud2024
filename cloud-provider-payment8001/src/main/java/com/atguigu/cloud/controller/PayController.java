@@ -3,6 +3,8 @@ package com.atguigu.cloud.controller;
 import com.atguigu.cloud.entities.Pay;
 import com.atguigu.cloud.entities.PayDTO;
 import com.atguigu.cloud.service.PayService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@Tag(name = "支付微服务模块", description = "订单CRUD")
 @Slf4j
 @RestController
 @RequestMapping("/pay")
@@ -28,6 +31,7 @@ public class PayController {
     private PayService payService;
 
     @PostMapping("/add")
+    @Operation(summary = "新增", description = "新增支付流水, 参数是JSON字符串")
     public String addPay(@RequestBody PayDTO payDTO) {
         Pay pay = new Pay();
         BeanUtils.copyProperties(payDTO, pay);
